@@ -1,0 +1,20 @@
+Package: PCEmisc
+Type: Package
+Title: Pol Castellano-Escuder Miscellaneous
+Version: 0.1.0
+Authors@R: 
+    c(person(given = "Pol",
+             family = "Castellano-Escuder",
+             role = c("aut", "cre"),
+             email = "polcaes@gmail.com",
+             comment = c(ORCID = "0000-0001-6466-877X"))
+             )
+Maintainer: Pol Castellano-Escuder <polcaes@gmail.com>
+Imports: dplyr,
+         magrittr,
+         tibble
+Description: This package contains functions useful for data
+  processing, statistical analysis, and other utility operations.
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
