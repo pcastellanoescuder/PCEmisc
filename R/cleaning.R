@@ -1,12 +1,12 @@
-cleaning_pce <- function(data,
-                         basic = TRUE,
-                         zerosAsNA = FALSE,
-                         removeZeros = FALSE,
-                         zero_cutoff = 0.3,
-                         na_cutoff = 0.3,
-                         knn = TRUE,
-                         norm = TRUE,
-                         first_col_ids = TRUE) {
+cleaning <- function(data,
+                     basic = TRUE,
+                     zerosAsNA = FALSE,
+                     removeZeros = FALSE,
+                     zero_cutoff = 0.3,
+                     na_cutoff = 0.3,
+                     knn = TRUE,
+                     norm = TRUE,
+                     first_col_ids = TRUE) {
 
   if(first_col_ids) {
     data <- data %>%
