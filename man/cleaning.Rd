@@ -6,9 +6,8 @@
 \usage{
 cleaning(
   data,
-  basic = TRUE,
-  zerosAsNA = FALSE,
-  removeZeros = FALSE,
+  zeros_as_na = FALSE,
+  remove_zeros = FALSE,
   zero_cutoff = 0.3,
   na_cutoff = 0.3,
   knn = TRUE,

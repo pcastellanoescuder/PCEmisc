@@ -8,9 +8,8 @@
 #'
 #' @export
 cleaning <- function(data,
-                     basic = TRUE,
-                     zerosAsNA = FALSE,
-                     removeZeros = FALSE,
+                     zeros_as_na = FALSE,
+                     remove_zeros = FALSE,
                      zero_cutoff = 0.3,
                      na_cutoff = 0.3,
                      knn = TRUE,
@@ -23,28 +22,26 @@ cleaning <- function(data,
       tibble::column_to_rownames("id")
   }
 
-  if(basic) {
-    ## Remove columns that only have NAs
-    data <- data[, apply(data, 2, function(x) !all(is.na(x)))]
+  ## Remove columns that only have NAs
+  data <- data[, apply(data, 2, function(x) !all(is.na(x)))]
 
-    ## Remove columns that only have zeros
-    data <- data[, apply(data, 2, function(x) !all(x == 0, na.rm = TRUE))]
+  ## Remove columns that only have zeros
+  data <- data[, apply(data, 2, function(x) !all(x == 0, na.rm = TRUE))]
 
-    ## Remove columns with var = 0
-    data <- data[, !apply(data, 2, function(x){var(x, na.rm = TRUE)}) == 0]
+  ## Remove columns with var = 0
+  data <- data[, !apply(data, 2, function(x){var(x, na.rm = TRUE)}) == 0]
 
-    if(removeZeros) {
-      ## Remove columns that with more than x% of zeros
-      data <- data[, colSums(data == 0, na.rm = TRUE)/nrow(data) < zero_cutoff]
-    }
-
-    if(zerosAsNA) {
-      data[data == 0] <- NA
-    }
-
-    ## Remove columns that with more than x% of NAs
-    data <- data[, !apply(data, 2, function(x){sum(is.na(x))/nrow(data)}) > na_cutoff]
+  if (remove_zeros) {
+    ## Remove columns with more than x% of zeros
+    data <- data[, colSums(data == 0, na.rm = TRUE)/nrow(data) < zero_cutoff]
   }
+
+  if (zeros_as_na) {
+    data[data == 0] <- NA
+  }
+
+  ## Remove columns that with more than x% of NAs
+  data <- data[, !apply(data, 2, function(x){sum(is.na(x))/nrow(data)}) > na_cutoff]
 
   if (knn) {
     ## KNN imputation
@@ -64,6 +61,5 @@ cleaning <- function(data,
   }
 
   return(data)
-
 }
 
